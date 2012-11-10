@@ -117,19 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Angle" xml:space="preserve">
+  <data name="ThreadAngle" xml:space="preserve">
     <value>Angle</value>
   </data>
-  <data name="CreateThreadsCommandHint" xml:space="preserve">
+  <data name="ThreadToolCommandHint" xml:space="preserve">
     <value>Create threads on selected cylinder.</value>
   </data>
-  <data name="CreateThreadsCommandText" xml:space="preserve">
+  <data name="ThreadToolCommandText" xml:space="preserve">
     <value>Create</value>
   </data>
-  <data name="IsImperial" xml:space="preserve">
-    <value>Imperial</value>
-  </data>
-  <data name="Pitch" xml:space="preserve">
+  <data name="ThreadPitch" xml:space="preserve">
     <value>Pitch</value>
   </data>
   <data name="ThreadsGroupText" xml:space="preserve">
@@ -141,7 +138,7 @@
   <data name="UtilitiesText" xml:space="preserve">
     <value>Utilities</value>
   </data>
-  <data name="IsInternal" xml:space="preserve">
+  <data name="ThreadIsInternal" xml:space="preserve">
     <value>Internal</value>
   </data>
   <data name="DistributeGroupText" xml:space="preserve">
@@ -192,5 +189,32 @@
   </data>
   <data name="ApiGrooveToolText" xml:space="preserve">
     <value>Ring Groove</value>
+  </data>
+  <data name="ApiGroove32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\apigroove32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ThreadPosition" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="ThreadPositionCenter" xml:space="preserve">
+    <value>Center</value>
+  </data>
+  <data name="ThreadPositionInside" xml:space="preserve">
+    <value>Inside</value>
+  </data>
+  <data name="ThreadPositionOutside" xml:space="preserve">
+    <value>Outside</value>
+  </data>
+  <data name="ThreadSpecificationMillimetersPerThread" xml:space="preserve">
+    <value>Millimeters per thread</value>
+  </data>
+  <data name="ThreadSpecificationThreadsPerInch" xml:space="preserve">
+    <value>Threads per inch</value>
+  </data>
+  <data name="ThreadToolOptions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\threadtooloptions.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ThreadToolStatusText" xml:space="preserve">
+    <value>Create a threaded body based on the size of the selected cylinder.</value>
   </data>
 </root>

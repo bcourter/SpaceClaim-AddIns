@@ -174,6 +174,7 @@ namespace SpaceClaim.AddInLibrary {
     public class RibbonTabCapsule : RibbonCommandCapsule {
         Dictionary<string, RibbonCommandValue> values = new Dictionary<string, RibbonCommandValue>();
         Dictionary<string, RibbonCommandBoolean> booleans = new Dictionary<string, RibbonCommandBoolean>();
+    //    Dictionary<string, RibbonCommandRadio> radios = new Dictionary<string, RibbonCommandRadio>();
 
         public RibbonTabCapsule(string name, string text, IRibbonObject parent)
             : base(name, text, null, null, parent) {
@@ -568,30 +569,34 @@ namespace SpaceClaim.AddInLibrary {
         }
     }
 
-    public class RibbonCommandRadio : RibbonInput {
-        bool value = false;
+#if false
+    public class RibbonCommandRadioGroup : RibbonInput {
+        int index;
+        string[] choises;
 
-        public RibbonCommandRadio(bool value)
+        public RibbonCommandRadioGroup(int index, string[] choises)
             : base(null) {
-            Value = value;
+            Index = index;
+            Choises = choises;
         }
 
-        public bool Value {
+        public bool Choises {
             get {
                 if (Command != null)
-                    value = Command.IsChecked;
+                    choises = Command.IsChecked;
 
-                return value;
+                return choises;
             }
 
             set {
-                this.value = value;
+                this.choises = value;
                 if (Command != null)
                     Command.IsChecked = value;
             }
 
         }
     }
+#endif
 
     public class NamedRibbonObject : IRibbonObject {
         string id;

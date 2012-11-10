@@ -19,26 +19,26 @@ namespace SpaceClaim.AddIn.Utilities {
     class ThreadsGroupCapsule : RibbonGroupCapsule {
         public ThreadsGroupCapsule(string name, RibbonTabCapsule parent)
             : base(name, Resources.ThreadsGroupText, parent, LayoutOrientation.horizontal) {
-            Values[Resources.Pitch] = new RibbonCommandValue(Settings.Default.Pitch);
-            Values[Resources.Angle] = new RibbonCommandValue(Settings.Default.Angle);
+            Values[Resources.ThreadPitch] = new RibbonCommandValue(Settings.Default.Pitch);
+            Values[Resources.ThreadAngle] = new RibbonCommandValue(Settings.Default.Angle);
             Booleans[Resources.IsImperial] = new RibbonCommandBoolean(Settings.Default.IsImperial);
-            Booleans[Resources.IsInternal] = new RibbonCommandBoolean(Settings.Default.IsInternal);
+            Booleans[Resources.ThreadIsInternal] = new RibbonCommandBoolean(Settings.Default.IsInternal);
         }
     }
 
     class ThreadButtonCapsule : RibbonButtonCapsule {
         public ThreadButtonCapsule(string name, RibbonCollectionCapsule parent, ButtonSize buttonSize)
-            : base(name, Resources.CreateThreadsCommandText, Resources.Threads32, Resources.CreateThreadsCommandHint, parent, buttonSize) {
+            : base(name, Resources.ThreadToolCommandText, Resources.Threads32, Resources.ThreadToolCommandHint, parent, buttonSize) {
         }
 
         protected override void OnExecute(Command command, ExecutionContext context, System.Drawing.Rectangle buttonRect) {
             double lengthConversion = ActiveWindow.Units.Length.ConversionFactor;
 
             bool isImperial = Booleans[Resources.IsImperial].Value;
-            bool isInternal = Booleans[Resources.IsInternal].Value;
+            bool isInternal = Booleans[Resources.ThreadIsInternal].Value;
 
-            double pitch = isImperial ? (Const.inches / Values[Resources.Pitch].Value) : (1E-3 * Values[Resources.Pitch].Value);
-            double angle = Values[Resources.Angle].Value * Math.PI / 180;
+            double pitch = isImperial ? (Const.inches / Values[Resources.ThreadPitch].Value) : (1E-3 * Values[Resources.ThreadPitch].Value);
+            double angle = Values[Resources.ThreadAngle].Value * Math.PI / 180;
 
 
             Body[] bodies = SpaceClaimExtensions.GetAllSelectedIDesignFaces(Window.ActiveWindow)

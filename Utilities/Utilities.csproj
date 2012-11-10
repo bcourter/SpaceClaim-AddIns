@@ -95,13 +95,13 @@
   <ItemGroup>
     <Compile Include="AddIn.cs" />
     <Compile Include="ApiGrooveTool.cs" />
+    <Compile Include="ThreadTool.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="DistributeSphereTool.cs" />
-    <Compile Include="UtilitiesRibbon.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -110,6 +110,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\ApiGrooveToolOptions.xml" />
+    <Content Include="Resources\ApiGroove32.png" />
+    <Content Include="Resources\ThreadToolOptions.xml" />
     <Content Include="Resources\DistributeSpheres32.png" />
     <Content Include="Resources\DistributeSpheresToolOptions.xml" />
     <Content Include="Resources\Threads32.png" />

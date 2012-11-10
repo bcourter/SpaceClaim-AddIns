@@ -47,15 +47,14 @@ namespace SpaceClaim.AddIn.Utilities {
 			RibbonButtonCapsule button;
             RibbonGroupCapsule group;
 
-            group = new ThreadsGroupCapsule("Threads", tab);
-            button = new ThreadButtonCapsule("Create", group, RibbonButtonCapsule.ButtonSize.large);
-            group.CreateOptionsUI();
-
-            group = new RibbonGroupCapsule("Spheres", Resources.DistributeGroupText, tab, RibbonCollectionCapsule.LayoutOrientation.horizontal);
-            button = new DistributeSpheresToolCapsule("Tool", group, RibbonButtonCapsule.ButtonSize.large);
+            group = new RibbonGroupCapsule("Thread", Resources.ThreadsGroupText, tab, RibbonCollectionCapsule.LayoutOrientation.horizontal);
+            button = new ThreadToolCapsule("Create", group, RibbonButtonCapsule.ButtonSize.large);
 
             group = new RibbonGroupCapsule("Shapes", Resources.ApiGrooveGroupText, tab, RibbonCollectionCapsule.LayoutOrientation.horizontal);
             button = new ApiGrooveToolCapsule("ApiGroove", group, RibbonButtonCapsule.ButtonSize.large);
+
+            group = new RibbonGroupCapsule("Spheres", Resources.DistributeGroupText, tab, RibbonCollectionCapsule.LayoutOrientation.horizontal);
+            button = new DistributeSpheresToolCapsule("Tool", group, RibbonButtonCapsule.ButtonSize.large);
         }
 
 		#endregion

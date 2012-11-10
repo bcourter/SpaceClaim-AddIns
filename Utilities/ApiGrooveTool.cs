@@ -61,7 +61,7 @@ namespace SpaceClaim.AddIn.Utilities {
     class ApiGrooveToolCapsule : RibbonButtonCapsule {
 
         public ApiGrooveToolCapsule(string commandName, RibbonCollectionCapsule parent, ButtonSize size)
-            : base(commandName, Resources.ApiGrooveToolText, null, Resources.ApiGrooveToolHint, parent, size) {
+            : base(commandName, Resources.ApiGrooveToolText, Resources.ApiGroove32, Resources.ApiGrooveToolHint, parent, size) {
         }
 
         protected override void OnInitialize(Command command) {
@@ -81,8 +81,6 @@ namespace SpaceClaim.AddIn.Utilities {
     }
 
     class ApiGrooveTool : Tool {
-        Plane apiGroovePlane;
-        Fin apiGrooveFin;
         ApiGroove apiGroove;
 
         public ApiGrooveTool()
@@ -98,9 +96,6 @@ namespace SpaceClaim.AddIn.Utilities {
         }
 
         void Reset() {
-            apiGroovePlane = null;
-            apiGrooveFin = null;
-
             Rendering = null;
             SelectionTypes = new[] { typeof(DesignEdge) };
             StatusText = Resources.ApiGrooveStatusText;

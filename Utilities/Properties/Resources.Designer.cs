@@ -60,12 +60,10 @@ namespace Utilities.Properties {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to Angle.
-        /// </summary>
-        internal static string Angle {
+        internal static System.Drawing.Bitmap ApiGroove32 {
             get {
-                return ResourceManager.GetString("Angle", resourceCulture);
+                object obj = ResourceManager.GetObject("ApiGroove32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -121,24 +119,6 @@ namespace Utilities.Properties {
         internal static string ApiGrooveToolText {
             get {
                 return ResourceManager.GetString("ApiGrooveToolText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create threads on selected cylinder..
-        /// </summary>
-        internal static string CreateThreadsCommandHint {
-            get {
-                return ResourceManager.GetString("CreateThreadsCommandHint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create.
-        /// </summary>
-        internal static string CreateThreadsCommandText {
-            get {
-                return ResourceManager.GetString("CreateThreadsCommandText", resourceCulture);
             }
         }
         
@@ -240,29 +220,65 @@ namespace Utilities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Imperial.
+        ///   Looks up a localized string similar to Angle.
         /// </summary>
-        internal static string IsImperial {
+        internal static string ThreadAngle {
             get {
-                return ResourceManager.GetString("IsImperial", resourceCulture);
+                return ResourceManager.GetString("ThreadAngle", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Internal.
         /// </summary>
-        internal static string IsInternal {
+        internal static string ThreadIsInternal {
             get {
-                return ResourceManager.GetString("IsInternal", resourceCulture);
+                return ResourceManager.GetString("ThreadIsInternal", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Pitch.
         /// </summary>
-        internal static string Pitch {
+        internal static string ThreadPitch {
             get {
-                return ResourceManager.GetString("Pitch", resourceCulture);
+                return ResourceManager.GetString("ThreadPitch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position.
+        /// </summary>
+        internal static string ThreadPosition {
+            get {
+                return ResourceManager.GetString("ThreadPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Center.
+        /// </summary>
+        internal static string ThreadPositionCenter {
+            get {
+                return ResourceManager.GetString("ThreadPositionCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inside.
+        /// </summary>
+        internal static string ThreadPositionInside {
+            get {
+                return ResourceManager.GetString("ThreadPositionInside", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outside.
+        /// </summary>
+        internal static string ThreadPositionOutside {
+            get {
+                return ResourceManager.GetString("ThreadPositionOutside", resourceCulture);
             }
         }
         
@@ -283,11 +299,73 @@ namespace Utilities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Millimeters per thread.
+        /// </summary>
+        internal static string ThreadSpecificationMillimetersPerThread {
+            get {
+                return ResourceManager.GetString("ThreadSpecificationMillimetersPerThread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threads per inch.
+        /// </summary>
+        internal static string ThreadSpecificationThreadsPerInch {
+            get {
+                return ResourceManager.GetString("ThreadSpecificationThreadsPerInch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thread.
         /// </summary>
         internal static string ThreadStructureText {
             get {
                 return ResourceManager.GetString("ThreadStructureText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create threads on selected cylinder..
+        /// </summary>
+        internal static string ThreadToolCommandHint {
+            get {
+                return ResourceManager.GetString("ThreadToolCommandHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        internal static string ThreadToolCommandText {
+            get {
+                return ResourceManager.GetString("ThreadToolCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;customUI xmlns=&quot;http://schemas.spaceclaim.com/customui&quot;&gt;
+        ///  &lt;panel&gt;
+        ///    &lt;group id=&quot;ThreadToolGroup&quot; label=&quot;API Groove&quot;&gt;
+        ///      &lt;container id=&quot;ThreadTypeContainer&quot; layoutOrientation=&quot;horizontal&quot;&gt;
+        ///        &lt;textbox id=&quot;ThreadPitchValue&quot; command=&quot;ThreadPitchValue&quot; width=&quot;20&quot;/&gt;
+        ///        &lt;comboBox id=&quot;ThreadSpecificationTypeList&quot; command=&quot;ThreadSpecificationTypeList&quot; textEditable=&quot;false&quot; type=&quot;default&quot; width=&quot;140&quot; /&gt;
+        ///      &lt;/container&gt;
+        ///      &lt;container id=&quot;ThreadAngle [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ThreadToolOptions {
+            get {
+                return ResourceManager.GetString("ThreadToolOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a threaded body based on the size of the selected cylinder..
+        /// </summary>
+        internal static string ThreadToolStatusText {
+            get {
+                return ResourceManager.GetString("ThreadToolStatusText", resourceCulture);
             }
         }
         
