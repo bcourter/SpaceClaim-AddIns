@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DashChainHint" xml:space="preserve">
+    <value>Create a dashed chain along a chain of curve segments.  Curves must be a well connected chain.</value>
+  </data>
+  <data name="DashChainText" xml:space="preserve">
+    <value>Dash Chain</value>
+  </data>
+  <data name="DashesGroupText" xml:space="preserve">
+    <value>Dashes</value>
+  </data>
+  <data name="DashesHint" xml:space="preserve">
+    <value>Create a dashed line with evenly spaced segments at least as big as the minimum size.</value>
+  </data>
+  <data name="DashesText" xml:space="preserve">
+    <value>Dashes</value>
+  </data>
+  <data name="DashSizeText" xml:space="preserve">
+    <value>Dash Size</value>
+  </data>
+  <data name="TesselateAngleDeviationText" xml:space="preserve">
+    <value>Angular Deviation</value>
+  </data>
+  <data name="TesselateSurfaceDeviationText" xml:space="preserve">
+    <value>Linear Deviation</value>
+  </data>
+  <data name="TessellateCommandHint" xml:space="preserve">
+    <value>Creates a body from the current body's current visible tessellation.</value>
+  </data>
+  <data name="TessellateCommandText" xml:space="preserve">
+    <value>Tessellate Body</value>
+  </data>
+  <data name="TessellateFoldCornerCommandHint" xml:space="preserve">
+    <value>Uses three or more curves to generate a foldable cone with creases on those curves.</value>
+  </data>
+  <data name="TessellateFoldCornerCommandText" xml:space="preserve">
+    <value>Fold Corner</value>
+  </data>
+  <data name="TessellateGroupText" xml:space="preserve">
+    <value>Tessellate</value>
+  </data>
+  <data name="TessellateLoftCommandHint" xml:space="preserve">
+    <value>Create a tessellated loft between two curves.</value>
+  </data>
+  <data name="TessellateLoftCommandText" xml:space="preserve">
+    <value>Loft</value>
+  </data>
+  <data name="UnfoldCollisionDetectionCommandHint" xml:space="preserve">
+    <value>When unfolding, see if the unfolded faces interfere with each other and seek alternate solutions.</value>
+  </data>
+  <data name="UnfoldCollisionDetectionCommandText" xml:space="preserve">
+    <value>Detect Collisions</value>
+  </data>
+  <data name="UnfoldCommandHint" xml:space="preserve">
+    <value>Unfolds the selected body to a flat pattern.</value>
+  </data>
+  <data name="UnfoldCommandText" xml:space="preserve">
+    <value>Unfold Body</value>
+  </data>
+  <data name="UnfoldCreateTabsCommandHint" xml:space="preserve">
+    <value>Create tabs for easier taping or glueing.</value>
+  </data>
+  <data name="UnfoldCreateTabsCommandText" xml:space="preserve">
+    <value>Create Tabs</value>
+  </data>
+  <data name="UnfoldGroupText" xml:space="preserve">
+    <value>Unfold</value>
+  </data>
+  <data name="UnfoldVerifyPlanarCommandHint" xml:space="preserve">
+    <value>Verify that all of the faces of the selected body are planar.</value>
+  </data>
+  <data name="UnfoldVerifyPlanarCommandText" xml:space="preserve">
+    <value>Verify Planar</value>
+  </data>
+  <data name="DetectCollisionsText" xml:space="preserve">
+    <value>Detect Collisions</value>
+  </data>
+  <data name="FlatCuttingLinesLayerName" xml:space="preserve">
+    <value>Cutting Lines</value>
+    <comment>Verify the same as in MyNesting</comment>
+  </data>
+  <data name="FlatFaceLayerName" xml:space="preserve">
+    <value>Flat Bodies</value>
+  </data>
+  <data name="FlatFaceName" xml:space="preserve">
+    <value>Flat Face</value>
+  </data>
+  <data name="FlatMediumEngravingLayerName" xml:space="preserve">
+    <value>Medium Engraving</value>
+    <comment>Verify the same as in MyNesting</comment>
+  </data>
+  <data name="UnfoldWithCurvesCommandHint" xml:space="preserve">
+    <value>Unfold bodies in all components and include any curves cooinciden with the faces.</value>
+  </data>
+  <data name="UnfoldWithCurvesCommanText" xml:space="preserve">
+    <value>Parts with Curves</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Tessellate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tessellate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Unfold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Unfold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotationLayerName" xml:space="preserve">
+    <value>Annotations</value>
+  </data>
+  <data name="AnnotationPlaneName" xml:space="preserve">
+    <value>Plane</value>
+  </data>
+  <data name="AnnotationPlanesLayerName" xml:space="preserve">
+    <value>Annotation Planes</value>
+  </data>
+  <data name="CopyCurvesHint" xml:space="preserve">
+    <value>Creates curve copies of the edges of selected faces, removing duplicate edges.</value>
+  </data>
+  <data name="CopyCurvesText" xml:space="preserve">
+    <value>Copy Curves</value>
+  </data>
+  <data name="CreateAnimateCommandHint" xml:space="preserve">
+    <value>I forget what this does.</value>
+  </data>
+  <data name="CreateAnimateCommandText" xml:space="preserve">
+    <value>Animate</value>
+  </data>
+  <data name="CreateDashesText" xml:space="preserve">
+    <value>Create Dashes</value>
+  </data>
+  <data name="TabText" xml:space="preserve">
+    <value>Unfold</value>
+  </data>
+  <data name="CreateGroupText" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="TessellateLoft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\tessellateloft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TessellateLoftBodyName" xml:space="preserve">
+    <value>Tessellated Loft</value>
+  </data>
+  <data name="TessellateLoftStepSize" xml:space="preserve">
+    <value>Step Size</value>
+  </data>
+  <data name="UnfoldNotPlanarError" xml:space="preserve">
+    <value>Error: not all faces of the body are planes. Problematic faces are now colored red.  Consider using the Tessellate command to convert the geometry.</value>
+  </data>
+  <data name="FlatPatternText" xml:space="preserve">
+    <value>Flat Pattern</value>
+  </data>
+  <data name="IsCreatingBreakLines" xml:space="preserve">
+    <value>Curves on Breaks</value>
+  </data>
+  <data name="BreakLinesMinimumAngle" xml:space="preserve">
+    <value>Minimum Angle</value>
+  </data>
+  <data name="BreakLinesDashSize" xml:space="preserve">
+    <value>Dash Size</value>
+  </data>
+  <data name="BreakLinesLayerName" xml:space="preserve">
+    <value>Break Lines</value>
+  </data>
+</root>

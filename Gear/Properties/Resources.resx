@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddDedendumClearance" xml:space="preserve">
+    <value>Dedendum Clearance</value>
+  </data>
+  <data name="AlignmentPlaneBodyName" xml:space="preserve">
+    <value>Alignment Plane</value>
+  </data>
+  <data name="AlignmentPlaneLayerName" xml:space="preserve">
+    <value>Gear Alignment</value>
+  </data>
+  <data name="AlignmentPlanePartName" xml:space="preserve">
+    <value>Gear Alignment Planes</value>
+  </data>
+  <data name="BevelAngleText" xml:space="preserve">
+    <value>Angle</value>
+  </data>
+  <data name="BevelKneeRatioText" xml:space="preserve">
+    <value>Knee Ratio</value>
+  </data>
+  <data name="CalculationsLine1Text" xml:space="preserve">
+    <value>Circular Pitch: {0:0.000}, Center Distance: {1:0.000}, Overall Width: {2:0.000}</value>
+  </data>
+  <data name="CalculationsLine2Text" xml:space="preserve">
+    <value>Left Gear Diameters: Pitch: {0:0.000}, Addendum: {1:0.000}, Dedendum: {2:0.000}</value>
+  </data>
+  <data name="CalculationsLine3Text" xml:space="preserve">
+    <value>Right Gear Diameters: Pitch: {0:0.000}, Addendum: {1:0.000}, Dedendum: {2:0.000}</value>
+  </data>
+  <data name="CreateGearCommandHint" xml:space="preserve">
+    <value>Create a gear pair.</value>
+  </data>
+  <data name="CreateGearCommandText" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="CreateGroupText" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="DedendumClearanceText" xml:space="preserve">
+    <value>Dedendum Clearance</value>
+  </data>
+  <data name="DepthText" xml:space="preserve">
+    <value>Depth</value>
+  </data>
+  <data name="ErrorInvalidGearProfile" xml:space="preserve">
+    <value>Error: gear parameters result in invalid profile.  Please see curves.</value>
+  </data>
+  <data name="FilletRadiusText" xml:space="preserve">
+    <value>Fillet Radius</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\gear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GearCalculationsGroupText" xml:space="preserve">
+    <value>Calculations</value>
+  </data>
+  <data name="GearLayerName" xml:space="preserve">
+    <value>Gears</value>
+  </data>
+  <data name="GearMountAlignmentCircleLayer" xml:space="preserve">
+    <value>Gear Alignment Circles</value>
+  </data>
+  <data name="GearMountPartName" xml:space="preserve">
+    <value>Gear Mount {0}-{1}</value>
+  </data>
+  <data name="GearNameSimple" xml:space="preserve">
+    <value>Gear</value>
+  </data>
+  <data name="GearPartNameFormat" xml:space="preserve">
+    <value>Gear: {2} teeth, {3:0.0}°, {0:0.00}{1} module</value>
+  </data>
+  <data name="HelicalAngleText" xml:space="preserve">
+    <value>Angle</value>
+  </data>
+  <data name="HypoidAngleText" xml:space="preserve">
+    <value>Angle</value>
+  </data>
+  <data name="HypoidOffsetText" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="IsBevelText" xml:space="preserve">
+    <value>Bevel</value>
+  </data>
+  <data name="IsHelicalText" xml:space="preserve">
+    <value>Helical</value>
+  </data>
+  <data name="IsHypoidText" xml:space="preserve">
+    <value>Hypoid</value>
+  </data>
+  <data name="IsScrewText" xml:space="preserve">
+    <value>Screw</value>
+  </data>
+  <data name="ModuleText" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="MountBodyName" xml:space="preserve">
+    <value>Mount Body {0}</value>
+  </data>
+  <data name="NumberOfTeethLText" xml:space="preserve">
+    <value>Left Gear Teeth</value>
+  </data>
+  <data name="NumberOfTeethRText" xml:space="preserve">
+    <value>Right Gear Teeth</value>
+  </data>
+  <data name="PitchCircleLayerName" xml:space="preserve">
+    <value>Gear Pitch Circles</value>
+  </data>
+  <data name="PitchCircleSurfaceName" xml:space="preserve">
+    <value>Pitch</value>
+  </data>
+  <data name="PressureAngleText" xml:space="preserve">
+    <value>Pressure Angle</value>
+  </data>
+  <data name="ScrewAngleBiasText" xml:space="preserve">
+    <value>Bias</value>
+  </data>
+  <data name="ScrewAngleText" xml:space="preserve">
+    <value>Angle</value>
+  </data>
+  <data name="TabText" xml:space="preserve">
+    <value>Gear</value>
+  </data>
+  <data name="UseTrochoidalText" xml:space="preserve">
+    <value>Trochoidal Interference Removal</value>
+  </data>
+  <data name="VisualizationBodyLayerName" xml:space="preserve">
+    <value>Visualization</value>
+  </data>
+  <data name="VisualizationBodyName" xml:space="preserve">
+    <value>Pitch Surface</value>
+  </data>
+</root>

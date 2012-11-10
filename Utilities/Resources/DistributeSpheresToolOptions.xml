@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<customUI xmlns="http://schemas.spaceclaim.com/customui">
+	<panel>
+		<group id="DistributeSpheresToolGroup" label="Profile Options">
+			<container id="DistributeSpheresToolContainer" layoutOrientation="vertical">
+				<container id="DistributeSpheresToolContainerColor" layoutOrientation="horizontal">
+					<label id="DistributeSpheresToolColorLabel" text="Color:" width="40"/>
+
+					<!--
+						Combo box items can either be specified in XML, or specified by setting the Command.ControlState to
+						be a ComboBoxState object.  If both are specified, the Command.ControlState overrides the XML.
+
+						The 'textEditable' attribute controls whether the combo box has an edit field.  If false (default), a
+						droplist of fixed values is shown, and initially the first item is selected.  The ComboBoxState also
+						specifies whether the combo box is editable, and this overrides what is specified in the XML.
+
+						In this sample, Command.ControlState does get set, so the <item> elements and the 'textEditable' attribute
+						are unnecessary and are just here to illustrate how you might specify them in XML.
+					-->
+					<comboBox id="DistributeSpheresToolColorList" command="DistributeSpheresToolColorList" textEditable="false" type="default" width="130">
+						<item label="Banana"/>
+						<item label="Apple"/>
+						<item label="Peach"/>
+						<item label="Grape"/>
+					</comboBox>
+
+        </container>
+        <container id="DistributeSpheresToolContainerCount" layoutOrientation="horizontal">
+          <label id="DistributeSpheresToolLineCountLabel" text="Count:" width="50"/>
+          <slider id="DistributeSpheresToolCountSlider" command="DistributeSpheresToolCountSlider" labelVisible="false"/>
+        </container>
+        <container id="DistributeSpheresToolContainerStrength" layoutOrientation="horizontal">
+          <label id="DistributeSpheresToolLineStrengthLabel" text="Strenght:" width="50"/>
+          <slider id="DistributeSpheresToolStrengthSlider" command="DistributeSpheresToolStrengthSlider" labelVisible="false"/>
+        </container>
+        <container id="DistributeSpheresToolContainerAnimate" layoutOrientation="horizontal">
+          <label id="DistributeSpheresToolAnimateLabel" text="Animate:" width="50"/>
+          <button id="DistributeSpheresToolAnimateStepButton" command="DistributeSpheresToolAnimateStepButton" />
+          <button id="DistributeSpheresToolAnimatePlayButton" command="DistributeSpheresToolAnimatePlayButton" />
+        </container>
+        <container id="DistributeSpheresToolContainerRadius" layoutOrientation="horizontal">
+          <label id="DistributeSpheresToolLineWidthLabel" text="Radius:" width="50"/>
+          <slider id="DistributeSpheresToolSlider" command="DistributeSpheresToolSlider" labelVisible="false"/>
+        </container>
+        <container id="DistributeSpheresToolContainerAnimate" layoutOrientation="horizontal">
+          <label id="DistributeSpheresToolAnimateLabel" text="Create:" width="50"/>
+          <button id="DistributeSpheresToolCreateSpheres" command="DistributeSpheresToolCreateSpheres" />
+        </container>
+      </container>
+    </group>
+	</panel>
+</customUI>

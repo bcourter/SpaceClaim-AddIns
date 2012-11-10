@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AddIns>
+	<AddIn name="Utilities" description="Miscellaneous  Utilities." assembly="Utilities.dll" typename="SpaceClaim.AddIn.Utilities.AddIn" host="SameAppDomain"/>
+</AddIns>

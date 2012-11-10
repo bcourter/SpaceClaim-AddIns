@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AddIns>
+	<AddIn name="Unfold" description="Unfold body into flat pattern" assembly="Unfold.dll" typename="SpaceClaim.AddIn.Unfold.AddIn" host="SameAppDomain"/>
+</AddIns>

@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AddIns>
+	<AddIn name="Gear" description="Create gear involutes." assembly="Gear.dll" typename="SpaceClaim.AddIn.Gear.AddIn" host="SameAppDomain"/>
+</AddIns>

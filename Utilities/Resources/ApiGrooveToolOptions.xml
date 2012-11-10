@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<customUI xmlns="http://schemas.spaceclaim.com/customui">
+  <panel>
+    <group id="ApiGrooveToolGroup" label="API Groove">
+      <container id="ApiGrooveToolContainerSize" layoutOrientation="horizontal">
+        <label id="ApiGrooveToolSizeLabel" text="Size:" width="40"/>
+        <comboBox id="ApiGrooveToolSizeList" command="ApiGrooveToolSizeList" textEditable="false" type="default" width="130" />
+      </container>
+    </group>
+  </panel>
+</customUI>
