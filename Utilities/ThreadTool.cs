@@ -302,22 +302,38 @@ namespace SpaceClaim.AddIn.Utilities {
             double stitchTolerance = Accuracy.LinearResolution * 1E4;
 
             double radius, innerRadius, outerRadius;
-            double start, end;
             Line axis;
             CurveSegment innerCurve, outerCurveA, outerCurveB;
             Matrix trans;
-            CreateUntransformedThreadCurves(cylinderFace, pitch, angle, positionOffset, out radius, out axis, out start, out end, out innerCurve, out outerCurveA, out outerCurveB, out trans, out innerRadius, out outerRadius);
+
+            Cylinder cylinder = cylinderFace.Geometry as Cylinder;
+            Debug.Assert(cylinder != null);
+            axis = cylinder.Axis;
+            Interval bounds = AxisBounds(cylinderFace, axis);
+
+            int threadsPerSurface = 2;
+            double threads = bounds.Span / pitch / threadsPerSurface;
+            int threadSurfaceCount = (int)threads + 2;
+            var surfaceBounds = Interval.Create(bounds.Start, bounds.Start + pitch * threadsPerSurface);
+            //       var extendedSurfaceBounds = Interval.Create(surfaceBounds.Start - surfaceBounds.Span / threadsPerSurface, surfaceBounds.End + surfaceBounds.Span / threadsPerSurface);
+            CreateUntransformedThreadCurves(cylinderFace, pitch, angle, surfaceBounds, positionOffset, out radius, out axis, out innerCurve, out outerCurveA, out outerCurveB, out trans, out innerRadius, out outerRadius);
 
             Body loftBodyA = Body.LoftProfiles(new[] { new[] { outerCurveA }, new[] { innerCurve } }, false, false);
             Body loftBodyB = Body.LoftProfiles(new[] { new[] { innerCurve }, new[] { outerCurveB } }, false, false);
             loftBodyA.Stitch(new[] { loftBodyB }, stitchTolerance, null);
-            loftBodyA.Print();
+            loftBodyA.Transform(Matrix.CreateTranslation(Direction.DirZ * -pitch * threadsPerSurface / 2));
 
             double threadDepth = outerRadius - innerRadius;
-            double length = end - start;
             double padding = 1.1;
             double paddedOuterRadius = innerRadius + threadDepth * padding;
-            //var capA = Body.ExtrudeProfile(Plane.PlaneXY, new[] { CurveSegment.Create(Circle.Create(Frame.World, radius * 2)) }, end - start);
+
+            var copies = new Body[threadSurfaceCount];
+            for (int i = 0; i < threadSurfaceCount; i++)
+                copies[i] = loftBodyA.CreateTransformedCopy(Matrix.CreateTranslation(Direction.DirZ * surfaceBounds.Span * (i + 1)));
+
+            loftBodyA.Stitch(copies, stitchTolerance, null);
+
+            double length = bounds.Span;
             var capA = Body.SweepProfile(Plane.PlaneZX, new[] {
                 Point.Origin,
                 Point.Create(innerRadius, 0, 0),
@@ -328,7 +344,6 @@ namespace SpaceClaim.AddIn.Utilities {
             }.AsPolygon(), new[] { CurveSegment.Create(Circle.Create(Frame.World, 1)) });
             loftBodyA.Imprint(capA);
 
-            loftBodyA.DeleteFaces(loftBodyA.Faces.Where(f => f.Edges.Where(e => e.Faces.Count == 1).Count() > 0).ToArray(), RepairAction.None);
             capA.DeleteFaces(capA.Faces
                 .Where(f => f.Edges
                     .Where(e => (e.Geometry is Circle && Accuracy.EqualLengths(((Circle)e.Geometry).Radius, paddedOuterRadius))
@@ -336,7 +351,12 @@ namespace SpaceClaim.AddIn.Utilities {
                 RepairAction.None
             );
 
-            loftBodyA.Stitch(new[] { capA }, stitchTolerance, null);
+            loftBodyA.Fuse(new[] { capA }, true, null);
+            while (!loftBodyA.IsManifold)
+                loftBodyA.DeleteFaces(loftBodyA.Faces.Where(f => f.Edges.Where(e => e.Faces.Count == 1).Count() > 0).ToArray(), RepairAction.None);
+
+       //     loftBodyA.Faces.Select(f => loftBodyA.CopyFaces(new[] { f })).ToArray().Print();
+
             loftBodyA.Transform(trans);
 
             return loftBodyA;
@@ -344,17 +364,40 @@ namespace SpaceClaim.AddIn.Utilities {
 
         private static void CreateThreadCurves(Face cylinderFace, double pitch, double angle, double positionOffset, out CurveSegment innerCurve, out CurveSegment outerCurveA, out CurveSegment outerCurveB) {
             double radius, innerRadius, outerRadius;
-            double start, end;
             Line axis;
             Matrix trans;
-            CreateUntransformedThreadCurves(cylinderFace, pitch, angle, positionOffset, out radius, out axis, out start, out end, out innerCurve, out outerCurveA, out outerCurveB, out trans, out innerRadius, out outerRadius);
+
+            Cylinder cylinder = cylinderFace.Geometry as Cylinder;
+            Debug.Assert(cylinder != null);
+
+            radius = cylinder.Radius;
+            axis = cylinder.Axis;
+            Line axisCopy = axis; //needed for out property in lambda expression
+
+            Interval bounds = AxisBounds(cylinderFace, axisCopy);
+
+            Interval extendedBounds = Interval.Create(bounds.Start - pitch, bounds.End + pitch);
+
+            CreateUntransformedThreadCurves(cylinderFace, pitch, angle, extendedBounds, positionOffset, out radius, out axis, out innerCurve, out outerCurveA, out outerCurveB, out trans, out innerRadius, out outerRadius);
 
             var planeA = Plane.PlaneXY;
-            var planeB = Plane.Create(Frame.Create(Point.Create(0, 0, end - start), Direction.DirZ));
+            var planeB = Plane.Create(Frame.Create(Point.Create(0, 0, bounds.Span), Direction.DirZ));
 
+            trans = trans * Matrix.CreateTranslation(Vector.Create(0, 0, pitch));
             innerCurve = TrimAndTransform(ref trans, planeA, planeB, innerCurve);
             outerCurveA = TrimAndTransform(ref trans, planeA, planeB, outerCurveA);
             outerCurveB = TrimAndTransform(ref trans, planeA, planeB, outerCurveB);
+        }
+
+        private static Interval AxisBounds(Face cylinderFace, Line axisCopy) {
+            double[] points = cylinderFace.Loops
+                .Where(l => l.IsOuter)
+                .SelectMany(l => l
+                    .Vertices.Select(v => v.Position)
+                    .Select(p => axisCopy.ProjectPoint(p).Param)
+                ).ToArray();
+
+            return Interval.Create(points.Min(), points.Max());
         }
 
         private static CurveSegment TrimAndTransform(ref Matrix trans, Plane planeA, Plane planeB, CurveSegment curve) {
@@ -364,42 +407,37 @@ namespace SpaceClaim.AddIn.Utilities {
             return curve.CreateTransformedCopy(trans);
         }
 
-        private static void CreateUntransformedThreadCurves(Face cylinderFace, double pitch, double angle, double positionOffset, out double radius, out Line axis, out double start, out double end, out CurveSegment innerCurve, out CurveSegment outerCurveA, out CurveSegment outerCurveB, out Matrix trans, out double innerRadius, out double outerRadius) {
+        private static void CreateUntransformedThreadCurves(Face cylinderFace, double pitch, double angle, Interval bounds, double positionOffset, out double radius, out Line axis, out CurveSegment innerCurve, out CurveSegment outerCurveA, out CurveSegment outerCurveB, out Matrix trans, out double innerRadius, out double outerRadius) {
             Cylinder cylinder = cylinderFace.Geometry as Cylinder;
             Debug.Assert(cylinder != null);
 
             radius = cylinder.Radius;
             axis = cylinder.Axis;
-            Line axisCopy = axis; //needed for out property in lambda expression
 
-            double[] points = cylinderFace.Loops
-                .Where(l => l.IsOuter)
-                .SelectMany(l => l
-                    .Vertices.Select(v => v.Position)
-                    .Select(p => axisCopy.ProjectPoint(p).Param)
-                ).ToArray();
-
-            start = points.Min();
-            end = points.Max();
-            double length = end - start + pitch * 2;
             double threadDepth = pitch / (2 * Math.Tan(angle / 2));
+
             innerRadius = radius + threadDepth * (positionOffset - 0.5);
             outerRadius = radius + threadDepth * (positionOffset + 0.5);
 
             int pointsPerTurn = 360;
-            int pointCount = (int)(length / pitch * pointsPerTurn);
+            int pointCount = (int)(bounds.Span / pitch * pointsPerTurn);
             var outerPoints = new Point[pointCount];
             var innerPoints = new Point[pointCount];
+            double s = bounds.Span;
+            double a = Const.Tau * s / pitch;
             for (int i = 0; i < pointCount; i++) {
-                double t = (double)i / pointCount;
-                double rotation = Const.Tau * t * length / pitch;
-                double depth = length * t;
+                double t = (double)i / (pointCount - 1);
+                double rotation = a * t;
+                double depth = s * t;
                 outerPoints[i] = Point.Create(outerRadius * Math.Cos(rotation), outerRadius * Math.Sin(rotation), depth);
                 innerPoints[i] = Point.Create(innerRadius * Math.Cos(rotation), innerRadius * Math.Sin(rotation), depth);
             }
 
-            var outerCurve = CurveSegment.Create(NurbsCurve.CreateThroughPoints(false, outerPoints, Accuracy.LinearResolution * 1E1));
-            innerCurve = CurveSegment.Create(NurbsCurve.CreateThroughPoints(false, innerPoints, Accuracy.LinearResolution * 1E1));
+            Func<double, double, Vector> Derivative = 
+                (t, r) => Vector.Create(-r * a * Math.Sin(a * t), r * a * Math.Cos(a * t), s);
+
+            var outerCurve = CurveSegment.Create(NurbsCurve.CreateThroughPoints(false, outerPoints, Accuracy.LinearResolution * 1E1, Derivative(0, outerRadius), Derivative(1, outerRadius)));
+            innerCurve = CurveSegment.Create(NurbsCurve.CreateThroughPoints(false, innerPoints, Accuracy.LinearResolution * 1E1, Derivative(0, innerRadius), Derivative(1, innerRadius)));
 
             var translation = Matrix.CreateTranslation(Vector.Create(0, 0, -pitch));
             var offset = Matrix.CreateTranslation(Direction.DirZ * pitch / 2);
@@ -407,7 +445,7 @@ namespace SpaceClaim.AddIn.Utilities {
             outerCurveB = outerCurve.CreateTransformedCopy(translation * offset.Inverse);
             innerCurve = innerCurve.CreateTransformedCopy(translation);
 
-            trans = Matrix.CreateMapping(Frame.Create(axis.Evaluate(start).Point, axis.Direction));
+            trans = Matrix.CreateMapping(Frame.Create(axis.Evaluate(bounds.Start).Point, axis.Direction));
         }
 
     }
