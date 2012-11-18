@@ -231,7 +231,7 @@ namespace SpaceClaim.AddInLibrary {
             return cleanProfile;
         }
 
-        public static IEnumerable<List<ITrimmedCurve>> ExtractChains(this IEnumerable<ITrimmedCurve> curveSegments) {
+        public static ICollection<IList<ITrimmedCurve>> ExtractChains(this ICollection<ITrimmedCurve> curveSegments) {
             var profiles = new List<List<ITrimmedCurve>>();
             var unsortedCurves = new Queue<ITrimmedCurve>(curveSegments);
 
@@ -282,7 +282,7 @@ namespace SpaceClaim.AddInLibrary {
                 }
             }
 
-            return profiles;
+            return profiles.Cast<IList<ITrimmedCurve>>().ToArray();
         }
 
         public static List<List<Point>> CloseProfiles(this List<List<Point>> profiles) {
@@ -363,6 +363,14 @@ namespace SpaceClaim.AddInLibrary {
             return closedProfiles;
         }
 
+        public static ICollection<ITrimmedCurve> OffsetAllLoops(this ICollection<ITrimmedCurve> curves, Plane plane, double distance, OffsetCornerType offsetCornerType) {
+            Body body = Body.CreatePlanarBody(plane, curves);
+            Debug.Assert(body.Faces.Count == 1);
+            Face face = body.Faces.First();
+
+            return face.OffsetAllLoops(distance, offsetCornerType);
+        }
+
         public static ICollection<ITrimmedCurve> OffsetAllLoops(this Face face, double distance, OffsetCornerType offsetCornerType) {
             Plane plane;
 
@@ -373,7 +381,7 @@ namespace SpaceClaim.AddInLibrary {
             if (plane == null)
                 throw new NotImplementedException();
 
-            Debug.Assert(face.Loops.Where(l => l.IsOuter).Count() == 1);
+            Debug.Assert(face.Loops.Where(l => l.IsOuter).Count() == 1, "Multiple outer loops not implemented");
 
             foreach (Loop loop in face.Loops) {
                 if (loop.IsOuter)
@@ -383,13 +391,13 @@ namespace SpaceClaim.AddInLibrary {
             }
 
             if (innerLoops.Count == 0)
-                return OffsetChainInward(face, outerLoop, distance, offsetCornerType, plane);
+                return outerLoop.OffsetChainInward(plane, distance, offsetCornerType);
 
             throw new NotImplementedException();
 
-            return DoInWriteBlock<ICollection<ITrimmedCurve>>(() => OffsetChainInwardWithInnerLoops(face, distance, offsetCornerType, plane, outerLoop, innerLoops));
+            // DTR throws exception in SpaceClaim
+            return DoInWriteBlock<ICollection<ITrimmedCurve>>(() => OffsetChainInwardWithInnerLoops(face, distance, offsetCornerType, outerLoop, innerLoops));
         }
-
 
         private static T DoInWriteBlock<T>(Func<T> func) {
             if (WriteBlock.IsActive)
@@ -401,16 +409,21 @@ namespace SpaceClaim.AddInLibrary {
             }
         }
 
-        private static ICollection<ITrimmedCurve> OffsetChainInwardWithInnerLoops(Face face, double distance, OffsetCornerType offsetCornerType, Plane plane, ITrimmedCurve[] outerLoop, List<ITrimmedCurve[]> innerLoops) {
+        private static ICollection<ITrimmedCurve> OffsetChainInwardWithInnerLoops(Face face, double distance, OffsetCornerType offsetCornerType, ITrimmedCurve[] outerLoop, List<ITrimmedCurve[]> innerLoops) {
+            if (!(face.Geometry is Plane))
+                throw new ArgumentException("Face must be planar");
+
+            Plane plane = (Plane)face.Geometry; 
+            
             Body outerBody = null;
             try {
-                outerBody = Body.CreatePlanarBody(plane, OffsetChainInward(face, outerLoop, distance, offsetCornerType, plane));
+                outerBody = Body.CreatePlanarBody(plane, outerLoop.OffsetChainInward(plane, distance, offsetCornerType));
             }
             catch {
                 return null;
             }
 
-            Body[] innerBodies = innerLoops.Select(l => Body.CreatePlanarBody(plane, OffsetChainInward(face, outerLoop, -distance, offsetCornerType, plane))).ToArray();
+            Body[] innerBodies = innerLoops.Select(l => Body.CreatePlanarBody(plane, outerLoop.OffsetChainInward(plane, -distance, offsetCornerType))).ToArray();
             try {
                 outerBody.Subtract(innerBodies);
             }
@@ -424,7 +437,52 @@ namespace SpaceClaim.AddInLibrary {
             return outerBody.Edges.Cast<ITrimmedCurve>().ToArray();
         }
 
-        private static ICollection<ITrimmedCurve> OffsetChainInward(Face face, ITrimmedCurve[] curves, double distance, OffsetCornerType offsetCornerType, Plane plane) {
+#if true
+        public static ICollection<ITrimmedCurve> OffsetChainInward(this ICollection<ITrimmedCurve> curves, Plane plane, double distance, OffsetCornerType offsetCornerType) {
+            ITrimmedCurve firstEdge = curves.First();
+            ITrimmedCurve[] otherEdges = curves.Skip(1).ToArray();
+
+            ICollection<ITrimmedCurve> offsetCurvesA = firstEdge.OffsetChain(plane, distance, otherEdges, offsetCornerType);
+            ICollection<ITrimmedCurve> offsetCurvesB = firstEdge.OffsetChain(plane, -distance, otherEdges, offsetCornerType);
+            if (offsetCurvesA.Count == 0 || offsetCurvesB.Count == 0)
+                return new ITrimmedCurve[0];
+
+            if (offsetCurvesA.Select(c => c.Length).Sum() < offsetCurvesB.Select(c => c.Length).Sum())
+                return offsetCurvesA;
+            else
+                return offsetCurvesB;
+        }
+#else
+        public static ICollection<ITrimmedCurve> OffsetChainInward(this ICollection<ITrimmedCurve> curves, Face face, double distance, OffsetCornerType offsetCornerType) {
+            if (!(face.Geometry is Plane))
+                throw new ArgumentException("Face must be planar");
+
+            Plane plane = (Plane)face.Geometry;
+
+            ITrimmedCurve firstEdge = curves.First();
+            ITrimmedCurve[] otherEdges = curves.Skip(1).ToArray();
+
+            ICollection<ITrimmedCurve> offsetCurves = firstEdge.OffsetChain(plane, distance, otherEdges, offsetCornerType);
+            if (offsetCurves.Count == 0)
+                return new ITrimmedCurve[0];
+
+            if (face.ContainsPoint(offsetCurves.First().StartPoint) ^ distance > 0)
+                return offsetCurves;
+
+            offsetCurves = firstEdge.OffsetChain(plane, -distance, otherEdges, offsetCornerType);
+            if (offsetCurves.Count == 0)
+                return new ITrimmedCurve[0];
+
+            return offsetCurves;
+        }
+#endif
+        public static ICollection<Face> OffsetFaceEdgesInward(this Face face, double distance, OffsetCornerType offsetCornerType) {
+            if (!(face.Geometry is Plane))
+                throw new ArgumentException("Face must be planar");
+
+            Plane plane = (Plane)face.Geometry;
+
+            ITrimmedCurve[] curves = face.Edges.ToArray();
             ITrimmedCurve firstEdge = curves.First();
             ITrimmedCurve[] otherEdges = curves.Skip(1).ToArray();
 
@@ -433,13 +491,13 @@ namespace SpaceClaim.AddInLibrary {
                 return null;
 
             if (face.ContainsPoint(offsetCurves.First().StartPoint) ^ distance > 0)
-                return offsetCurves;
+                return DoInWriteBlock<ICollection<Face>>(() => Body.CreatePlanarBody(plane, offsetCurves).SeparatePieces().Select(b => b.Faces.First()).ToList());
 
             offsetCurves = firstEdge.OffsetChain(plane, -distance, otherEdges, offsetCornerType);
             if (offsetCurves.Count == 0)
                 return null;
 
-            return offsetCurves;
+            return Body.CreatePlanarBody(plane, offsetCurves).SeparatePieces().Select(b => b.Faces.First()).ToList();
         }
 
         public static ITrimmedCurve GetReverse(this ITrimmedCurve curve) {
@@ -498,6 +556,12 @@ namespace SpaceClaim.AddInLibrary {
         }
 
         #region ModelerExtensions
+
+        public static ICollection<Face> GetSurvivors(this Tracker tracker, Face face) {
+            ICollection<Face> survivorList;
+            bool success = tracker.TryGetSurvivors(face, out survivorList);
+            return success ? survivorList : new[] { face };
+        }
 
         /// <summary>
         /// Attempt to find convexity-sensitive angle between the normals of the adjacent faces of an edge using its midpoint. Returns a negavive angle for concave edges, 0 for tangent, or postitive for convex.
