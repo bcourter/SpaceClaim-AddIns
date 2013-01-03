@@ -59,6 +59,9 @@ namespace SpaceClaim.AddInLibrary {
 		}
 
 		public static ICollection<ITrimmedCurve> GetAllSelectedITrimmedCurves(this Window window) {
+            if (window == null)
+                return null;
+
 			Dictionary<ITrimmedCurve, byte> trimmedCurves = new Dictionary<ITrimmedCurve, byte>();  // dictionary used this way becomes a unique set
 
 			foreach (IDesignBody iDesignBody in window.ActiveContext.GetSelection<IDesignBody>()) {

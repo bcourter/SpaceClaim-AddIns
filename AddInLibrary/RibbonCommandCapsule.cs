@@ -325,13 +325,14 @@ namespace SpaceClaim.AddInLibrary {
                         width = Math.Max(width, (int)graphics.MeasureString(name, font).Width);
                     }
 
-                    if (valueColumn.Count == 1)
-                        valueContainer = topContainer;
-                    else
-                        valueContainer = new RibbonContainerCapsule(String.Format("Values{0}", i++), topContainer, LayoutOrientation.vertical, false);
+         //           if (valueColumn.Count == 1)
+           //             valueContainer = topContainer;
+         //           else
+          //              valueContainer = new RibbonContainerCapsule(String.Format("Values{0}", i++), topContainer, LayoutOrientation.vertical, false);
 
                     foreach (string name in column.Keys) {
-                        container = new RibbonContainerCapsule(name + "Container", valueContainer, LayoutOrientation.horizontal, false);
+                        container = new RibbonContainerCapsule(name + "Container", this, LayoutOrientation.horizontal, false);
+                       // container = new RibbonContainerCapsule(name + "Container", valueContainer, LayoutOrientation.horizontal, false);
                         new RibbonLabelCapsule(name + "Label", name, name, container, width).Command.Updating += delegate(object sender, EventArgs e) {
                             ((Command)sender).IsEnabled = IsEnabledCommandBoolean.Command.IsChecked;
                         };

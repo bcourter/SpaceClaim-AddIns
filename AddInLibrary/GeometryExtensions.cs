@@ -39,6 +39,10 @@ namespace SpaceClaim.AddInLibrary {
             return interval.Start + interval.Span / 2;
         }
 
+        public static double AngleInXY(this Vector vector) {
+            return Math.Atan2(vector.Y, vector.X);
+        }
+
         public static double AngleInFrame(this Vector vector, Frame frame) {
             double x = Vector.Dot(vector, frame.DirX.UnitVector);
             double y = Vector.Dot(vector, frame.DirY.UnitVector);
@@ -97,6 +101,7 @@ namespace SpaceClaim.AddInLibrary {
             return size.X * size.Y * size.Z;
         }
 
+#if false
         public static Point ProjectToPlane(this Point point, Plane plane) {
             Direction normal = plane.Frame.DirZ;
             Vector pointVector = point.Vector;
@@ -105,6 +110,11 @@ namespace SpaceClaim.AddInLibrary {
 
             return Point.Origin + pointVector;
         }
+#else
+        public static Point ProjectToPlane(this Point point, Plane plane) {
+            return plane.ProjectPoint(point).Point;
+        }
+#endif
 
         public static SurfaceEvaluation ProjectPointToShell(this Body body, Point point, out Face face) {
             Debug.Assert(body != null);
@@ -194,7 +204,7 @@ namespace SpaceClaim.AddInLibrary {
             ITrimmedCurve[] otherCurves = curves.Skip(1).ToArray();
 
             bool isLeft = Vector.Dot(Vector.Cross(firstCurve.Geometry.Evaluate(0).Tangent.UnitVector, point - firstCurve.StartPoint), plane.Frame.DirZ.UnitVector) >= 0;
-            return firstCurve.OffsetChain(plane, (isLeft ? -1 : 1) * distance, otherCurves, OffsetCornerType.LinearExtension);
+            return firstCurve.OffsetChain(plane, (isLeft ? -1 : 1) * distance, otherCurves, OffsetCornerType.NaturalExtension);
         }
 
         public static List<Point> CleanProfile(this List<Point> profile, double tolerance) {  //TBD this may not work correctly

@@ -111,6 +111,7 @@
     <None Include="Resources\Unfold.png" />
     <None Include="Resources\Tessellate.png" />
     <Content Include="Resources\TessellateLoft.png" />
+    <Content Include="Readme.txt" />
     <Content Include="Unfold.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

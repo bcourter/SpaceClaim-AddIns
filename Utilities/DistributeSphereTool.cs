@@ -114,6 +114,7 @@ namespace SpaceClaim.AddIn.Utilities {
 
         public static void Initialize() {
             Command command = Command.Create(commandName);
+            command.IsWriteBlock = false;
             command.Text = commandText;
         }
 
@@ -128,6 +129,7 @@ namespace SpaceClaim.AddIn.Utilities {
 
         public static void Initialize() {
             Command command = Command.Create(commandName);
+            command.IsWriteBlock = false;
             command.Text = commandText;
         }
 

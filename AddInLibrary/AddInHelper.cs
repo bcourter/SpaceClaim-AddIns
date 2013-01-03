@@ -84,7 +84,7 @@ namespace SpaceClaim.AddInLibrary {
 		//	if (angle < 0)
 		//		dir = -dir;
 
-			plane = Plane.Create(Frame.Create(points[0], dir.ArbitraryPerpendicular));
+			plane = Plane.Create(Frame.Create(points[0], dir));
 			return true;
 		}
 
