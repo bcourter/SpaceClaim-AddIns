@@ -7,12 +7,15 @@ using System.Diagnostics;
 namespace SpaceClaim.AddInLibrary {
     public class CircularList<T> : IEnumerable<T> {
         List<T> List { get; set; }
+        int count;
 
         public CircularList(int count) {
-            List = new List<T>(count); ;
+            this.count = count;
+            List = new List<T>(count);
         }
 
-        public CircularList(ICollection<T> collection) {
+        public CircularList(ICollection<T> collection)
+        {
             List = collection.ToList();
         }
 
@@ -40,7 +43,7 @@ namespace SpaceClaim.AddInLibrary {
         }
 
         public int Count {
-            get { return List.Count; }
+            get { return count; }
         }
 
 

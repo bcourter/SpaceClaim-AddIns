@@ -183,6 +183,15 @@ namespace SpaceClaim.AddIn.Gear {
 			double maxDist = 0;
 
 			ICollection<IntPoint<CurveEvaluation, CurveEvaluation>> intersections = trochoidA.IntersectCurve(addendumCircle);
+            if (intersections.Count == 0) {
+                trochoidA.Print();
+                trochoidA.CreateTransformedCopy(mirror).Print();
+                addendumCircle.Print();
+                curveA.Print();
+                curveA.CreateTransformedCopy(mirror).Print();
+                
+            }
+
 			IntPoint<CurveEvaluation, CurveEvaluation> intersectionOther = intersections.First();
 			foreach (IntPoint<CurveEvaluation, CurveEvaluation> intersection in intersections) {
 				double dist = Math.Abs(intersection.EvaluationA.Param - intersectionInvolute.EvaluationA.Param);

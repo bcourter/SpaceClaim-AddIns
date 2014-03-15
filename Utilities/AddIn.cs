@@ -55,7 +55,9 @@ namespace SpaceClaim.AddIn.Utilities {
 
             group = new RibbonGroupCapsule("Spheres", Resources.DistributeGroupText, tab, RibbonCollectionCapsule.LayoutOrientation.horizontal);
             button = new DistributeSpheresToolCapsule("Tool", group, RibbonButtonCapsule.ButtonSize.large);
-        }
+
+			SpaceClaim.Api.V10.Application.AddFileHandler(new ExplodedSTEPSaveHandler());
+		}
 
 		#endregion
 	}

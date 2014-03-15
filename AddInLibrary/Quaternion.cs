@@ -86,6 +86,9 @@ namespace SpaceClaim.AddInLibrary {
 		}
 
 		public static Quaternion operator /(Quaternion a, double divisor) {
+            if (divisor == 0)
+                return a;
+
 			return a * (double) 1 / divisor;
 		}
 

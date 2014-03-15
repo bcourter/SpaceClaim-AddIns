@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="AddIn.cs" />
     <Compile Include="ApiGrooveTool.cs" />
+    <Compile Include="SaveExplodedSTEP.cs" />
     <Compile Include="ThreadTool.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

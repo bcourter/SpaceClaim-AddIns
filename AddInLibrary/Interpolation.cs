@@ -34,7 +34,7 @@ namespace SpaceClaim.AddInLibrary {
 			Rotation rotation = Rotation.CreateFromMatrix(a.Inverse * b);
 
 			return
-				Matrix.CreateTranslation(translation * t) *
+                Matrix.CreateTranslation(a.Translation + translation * t) *
 				Matrix.CreateScale(a.Scale + scale * t) *
 				Matrix.CreateRotation(Line.Create(Point.Origin, rotation.Direction), rotation.Angle * t)
 			;
