@@ -12,6 +12,9 @@ namespace SpaceClaim.AddInLibrary {
 		List<OrientedTrimmedCurve> orientedCurves = new List<OrientedTrimmedCurve>();
 
 		public TrimmedCurveChain(ICollection<ITrimmedCurve> curveCollection) {
+            if (curveCollection.Count == 0)
+                return;
+
 			Queue<ITrimmedCurve> curveQueue = new Queue<ITrimmedCurve>(curveCollection);
 
 			orientedCurves.Add(new OrientedTrimmedCurve(curveQueue.Dequeue(), false));
@@ -51,6 +54,53 @@ namespace SpaceClaim.AddInLibrary {
 				}
 			}
 		}
+
+        public static ICollection<TrimmedCurveChain> GatherLoops(ICollection<ITrimmedCurve> curveCollection) {
+            Queue<ITrimmedCurve> curveQueue = new Queue<ITrimmedCurve>(curveCollection);
+            var loops = new List<TrimmedCurveChain>();
+            var chain = new TrimmedCurveChain(new List<ITrimmedCurve>());
+            loops.Add(chain);
+            chain.Curves.Add(new OrientedTrimmedCurve(curveQueue.Dequeue(), false));
+
+            ITrimmedCurve trimmedCurve = null;
+            int failCount = curveQueue.Count;
+            while (curveQueue.Count > 0) {
+                trimmedCurve = curveQueue.Dequeue();
+
+                if (trimmedCurve.StartPoint == chain.Curves[chain.Curves.Count - 1].EndPoint) {
+                    chain.Curves.Add(new OrientedTrimmedCurve(trimmedCurve, false));
+                    failCount = curveQueue.Count;
+                    continue;
+                }
+
+                if (trimmedCurve.EndPoint == chain.Curves[chain.Curves.Count - 1].EndPoint) {
+                    chain.Curves.Add(new OrientedTrimmedCurve(trimmedCurve, true));
+                    failCount = curveQueue.Count;
+                    continue;
+                }
+
+                if (trimmedCurve.StartPoint == chain.Curves[0].StartPoint) {
+                    chain.Curves.Insert(0, new OrientedTrimmedCurve(trimmedCurve, true));
+                    failCount = curveQueue.Count;
+                    continue;
+                }
+
+                if (trimmedCurve.EndPoint == chain.Curves[0].StartPoint) {
+                    chain.Curves.Insert(0, new OrientedTrimmedCurve(trimmedCurve, false));
+                    failCount = curveQueue.Count;
+                    continue;
+                }
+
+                curveQueue.Enqueue(trimmedCurve);
+                if (failCount-- < 0) {
+                    chain = new TrimmedCurveChain(new List<ITrimmedCurve>());
+                    loops.Add(chain);
+                    chain.Curves.Add(new OrientedTrimmedCurve(curveQueue.Dequeue(), false));
+                }
+            }
+
+            return loops;
+        }
 
 		public double Length {
 			get {
